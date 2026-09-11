@@ -1,0 +1,23 @@
+/node_modules
+/oh_modules
+/local.properties
+/.idea
+**/build
+/.hvigor
+.cxx
+/.clangd
+/.clang-format
+/.clang-tidy
+**/.test
+/.appanalyzer
+
+# 构建日志与开发产物
+*.log
+/verification/
+/ui/
+/design_refs/
+/spec/
+/.asset_preview.png
+/.lower_cards.png
+/.nav_grid.png
+/.right_icons.png

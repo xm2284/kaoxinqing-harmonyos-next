@@ -1,0 +1,19 @@
+{
+  "src": [
+    "pages/SplashPage",
+    "pages/Index",
+    "pages/AssessmentRoutePage",
+    "pages/GamePage",
+    "pages/EvolutionTreePage",
+    "pages/RelaxationPage",
+    "pages/CognitivePage",
+    "pages/CognitiveWorkshopPage",
+    "pages/RestBreakPage",
+    "pages/AnalysisPage",
+    "pages/CountdownSettingPage",
+    "pages/AppSettingsPage",
+    "pages/HelpPage",
+    "pages/SupportPage",
+    "pages/GrowthRecordsPage"
+  ]
+}

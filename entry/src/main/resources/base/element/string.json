@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "基于 HarmonyOS 的考试焦虑智能辅助应用"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "考心晴 - 考试焦虑智能辅助应用"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "考心晴"
+    },
+    {
+      "name": "distributed_data_reason",
+      "value": "用于在用户授权后同步测评进度、压力指数和学习进度，以便在其他鸿蒙设备继续使用"
+    },
+    {
+      "name": "microphone_reason",
+      "value": "用于将你主动说出的内容转换为文字，填入心语教练输入框"
+    }
+  ]
+}
