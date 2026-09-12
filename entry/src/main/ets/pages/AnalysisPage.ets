@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { AppConstants, ExamScore } from '../common/DataModels';
 import { DatabaseService } from '../services/DatabaseService';
 import { UiTokens } from '../common/UiTokens';
@@ -218,7 +217,7 @@ struct AnalysisPage {
         .width(44).height(44).accessibilityText('返回')
         .backgroundColor('#26FFFFFF')
         .onClick(() => {
-          router.back();
+          this.getUIContext().getRouter().back();
         })
         Text('考后分析')
           .fontSize(22)

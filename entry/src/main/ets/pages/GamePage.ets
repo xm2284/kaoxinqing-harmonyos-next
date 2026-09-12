@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import {
   AppConstants,
   DailyQuote,
@@ -51,13 +50,13 @@ struct GamePage {
   }
 
   private enterGrowthPage(): void {
-    router.pushUrl({ url: 'pages/EvolutionTreePage' }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: 'pages/EvolutionTreePage' }).catch(() => {
       this.showToast('思维进化树暂时没有打开，再试一次？');
     });
   }
 
   private openCognitivePage(): void {
-    router.pushUrl({ url: 'pages/CognitiveWorkshopPage' }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: 'pages/CognitiveWorkshopPage' }).catch(() => {
       this.showToast('认知重构工坊暂时没有打开，再试一次？');
     });
   }
@@ -158,7 +157,7 @@ struct GamePage {
     this.deckRecordedIndices = [];
     this.deckSavingIndices = [];
     const timerId: number = setTimeout(() => {
-      animateTo({ duration: 260, curve: Curve.Friction }, () => {
+      this.getUIContext().animateTo({ duration: 260, curve: Curve.Friction }, () => {
         this.deckScale = 1;
         this.deckOpacity = 1;
       });
@@ -171,13 +170,13 @@ struct GamePage {
       return;
     }
     HapticService.light();
-    animateTo({ duration: 140, curve: Curve.EaseIn }, () => {
+    this.getUIContext().animateTo({ duration: 140, curve: Curve.EaseIn }, () => {
       this.cardScaleX = 0.02;
     });
     const timerId: number = setTimeout(() => {
       this.activeCardRevealed = true;
       this.recordDeckCard(this.activeCardIndex);
-      animateTo({ duration: 190, curve: Curve.EaseOut }, () => {
+      this.getUIContext().animateTo({ duration: 190, curve: Curve.EaseOut }, () => {
         this.cardScaleX = 1;
       });
     }, 140);
@@ -193,7 +192,7 @@ struct GamePage {
       this.finishCardDeck();
       return;
     }
-    animateTo({ duration: 150, curve: Curve.EaseIn }, () => {
+    this.getUIContext().animateTo({ duration: 150, curve: Curve.EaseIn }, () => {
       this.deckScale = 0.86;
       this.deckOpacity = 0;
     });
@@ -201,7 +200,7 @@ struct GamePage {
       this.activeCardIndex++;
       this.activeCardRevealed = false;
       this.cardScaleX = 1;
-      animateTo({ duration: 240, curve: Curve.Friction }, () => {
+      this.getUIContext().animateTo({ duration: 240, curve: Curve.Friction }, () => {
         this.deckScale = 1;
         this.deckOpacity = 1;
       });
@@ -210,7 +209,7 @@ struct GamePage {
   }
 
   private closeCardDeck(): void {
-    animateTo({ duration: 180, curve: Curve.EaseIn }, () => {
+    this.getUIContext().animateTo({ duration: 180, curve: Curve.EaseIn }, () => {
       this.deckScale = 0.9;
       this.deckOpacity = 0;
     });
@@ -241,7 +240,7 @@ struct GamePage {
     for (let index: number = 0; index < 6; index++) {
       this.recordDeckCard(index);
     }
-    animateTo({ duration: 180, curve: Curve.EaseIn }, () => {
+    this.getUIContext().animateTo({ duration: 180, curve: Curve.EaseIn }, () => {
       this.deckScale = 0.9;
       this.deckOpacity = 0;
     });
@@ -412,12 +411,12 @@ struct GamePage {
         ]
       }).then((result) => {
         if (result.index === 1) {
-          router.back();
+          this.getUIContext().getRouter().back();
         }
       });
       return;
     }
-    router.back();
+    this.getUIContext().getRouter().back();
   }
 
   private confirmDelete(item: ThoughtChallenge): void {
@@ -1044,7 +1043,7 @@ struct GamePage {
   GameFooterBar() {
     Row({ space: 10 }) {
       Button('我的记录').layoutWeight(1).height(46).fontSize(14).fontColor('#235DA1').backgroundColor(Color.White)
-        .onClick(() => { router.pushUrl({ url: 'pages/GrowthRecordsPage', params: { filter: 1 } }).catch(() => {
+        .onClick(() => { this.getUIContext().getRouter().pushUrl({ url: 'pages/GrowthRecordsPage', params: { filter: 1 } }).catch(() => {
           this.showToast('记录页暂时未打开。');
         }); })
       Button(this.loading ? '正在洗牌…' : '再翻一次').layoutWeight(1).height(46).fontSize(14)

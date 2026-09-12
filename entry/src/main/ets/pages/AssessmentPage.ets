@@ -2,7 +2,6 @@ import {
   AppConstants,
   AssessmentRecord
 } from '../common/DataModels';
-import { router } from '@kit.ArkUI';
 import { MemePopup } from '../common/MemePopup';
 import { UiTokens } from '../common/UiTokens';
 import { DatabaseService } from '../services/DatabaseService';
@@ -305,7 +304,7 @@ export struct AssessmentPage {
   }
 
   private leavePage(): void {
-    router.back();
+    this.getUIContext().getRouter().back();
   }
 
   build() {

@@ -11,6 +11,7 @@ import {
   DailyQuote,
   ExamInfo,
   ExamScore,
+  MentalHealthRecord,
   StudyTask,
   ThoughtChallenge,
   TrainingRecord,
@@ -19,7 +20,7 @@ import {
 } from '../common/DataModels';
 
 const STORE_CONFIG: relationalStore.StoreConfig = {
-  // v2 使用完整 12 表结构；保留旧数据库文件，避免破坏用户已有数据。
+  // v2 保留同一数据库文件并按需补表，避免破坏用户已有数据。
   name: 'kaoxinqing_v2.db',
   securityLevel: relationalStore.SecurityLevel.S1
 };
@@ -43,6 +44,10 @@ const CREATE_TABLE_SQL: string[] = [
     'id INTEGER PRIMARY KEY AUTOINCREMENT, role TEXT NOT NULL, content TEXT NOT NULL, timestamp TEXT NOT NULL)',
   'CREATE TABLE IF NOT EXISTS training_records (' +
     'id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT NOT NULL, type TEXT NOT NULL, duration INTEGER NOT NULL)',
+  'CREATE TABLE IF NOT EXISTS mental_health_records (' +
+    'id INTEGER PRIMARY KEY AUTOINCREMENT, recordedAt TEXT NOT NULL, moodScore INTEGER NOT NULL, ' +
+    'moodLabel TEXT NOT NULL, emotions TEXT NOT NULL, factors TEXT NOT NULL, note TEXT NOT NULL, ' +
+    'source TEXT NOT NULL)',
   'CREATE TABLE IF NOT EXISTS exam_scores (' +
     'id INTEGER PRIMARY KEY AUTOINCREMENT, subject TEXT NOT NULL, score REAL NOT NULL, fullScore REAL NOT NULL)',
   'CREATE TABLE IF NOT EXISTS daily_quotes (' +
@@ -427,6 +432,67 @@ export class DatabaseService {
 
   static async deleteAssessment(id: number): Promise<void> {
     await DatabaseService.requireStore().delete(DatabaseService.predicates('assessments', id));
+  }
+
+  static async getMentalHealthRecords(): Promise<MentalHealthRecord[]> {
+    const result: relationalStore.ResultSet = await DatabaseService.requireStore().query(
+      new relationalStore.RdbPredicates('mental_health_records').orderByDesc('recordedAt'));
+    const items: MentalHealthRecord[] = [];
+    try {
+      while (result.goToNextRow()) {
+        items.push({
+          id: result.getLong(result.getColumnIndex('id')),
+          recordedAt: result.getString(result.getColumnIndex('recordedAt')),
+          moodScore: result.getLong(result.getColumnIndex('moodScore')),
+          moodLabel: result.getString(result.getColumnIndex('moodLabel')),
+          emotions: JSON.parse(result.getString(result.getColumnIndex('emotions'))) as string[],
+          factors: JSON.parse(result.getString(result.getColumnIndex('factors'))) as string[],
+          note: result.getString(result.getColumnIndex('note')),
+          source: result.getString(result.getColumnIndex('source'))
+        });
+      }
+    } finally {
+      result.close();
+    }
+    return items;
+  }
+
+  static async addMentalHealthRecord(item: MentalHealthRecord): Promise<number> {
+    const values: relationalStore.ValuesBucket = {
+      recordedAt: item.recordedAt,
+      moodScore: item.moodScore,
+      moodLabel: item.moodLabel,
+      emotions: JSON.stringify(item.emotions),
+      factors: JSON.stringify(item.factors),
+      note: item.note,
+      source: item.source
+    };
+    const id: number = await DatabaseService.requireStore().insert('mental_health_records', values);
+    DatabaseService.notifyChanged();
+    return id;
+  }
+
+  static async updateMentalHealthRecord(item: MentalHealthRecord): Promise<void> {
+    if (item.id === undefined) {
+      return;
+    }
+    const values: relationalStore.ValuesBucket = {
+      recordedAt: item.recordedAt,
+      moodScore: item.moodScore,
+      moodLabel: item.moodLabel,
+      emotions: JSON.stringify(item.emotions),
+      factors: JSON.stringify(item.factors),
+      note: item.note,
+      source: item.source
+    };
+    await DatabaseService.requireStore().update(values,
+      DatabaseService.predicates('mental_health_records', item.id));
+    DatabaseService.notifyChanged();
+  }
+
+  static async deleteMentalHealthRecord(id: number): Promise<void> {
+    await DatabaseService.requireStore().delete(DatabaseService.predicates('mental_health_records', id));
+    DatabaseService.notifyChanged();
   }
 
   static async getAllChatMessages(): Promise<ChatMessage[]> {

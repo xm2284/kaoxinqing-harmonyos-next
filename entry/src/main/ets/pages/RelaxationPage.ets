@@ -1,6 +1,6 @@
 import { common } from '@kit.AbilityKit';
-import { router, window } from '@kit.ArkUI';
-import { AppConstants, BreathingMode, TrainingRecord } from '../common/DataModels';
+import { window } from '@kit.ArkUI';
+import { AppConstants, BreathingMode, MentalHealthRecord, TrainingRecord } from '../common/DataModels';
 import { IntentService } from '../service/IntentService';
 import { LiveViewService } from '../service/LiveViewService';
 import { BreathingModeService } from '../services/BreathingModeService';
@@ -90,6 +90,8 @@ struct RelaxationPage {
   @State elapsed: number = 0;
   @State breathProgress: number = 0;
   @State completionFeeling: string = '';
+  @State completionMoodRecordId: number = -1;
+  @State completionMoodRecordedAt: string = '';
   @State editingRecordId: number = -1;
   @State editingDurationText: string = '';
   @State activeModeId: string = '478';
@@ -155,6 +157,8 @@ struct RelaxationPage {
     this.running = true;
     this.paused = false;
     this.completionFeeling = '';
+    this.completionMoodRecordId = -1;
+    this.completionMoodRecordedAt = '';
     this.elapsed = 0;
     this.round = 1;
     this.lastTickAt = Date.now();
@@ -163,7 +167,7 @@ struct RelaxationPage {
     this.phase = '吸气';
     this.phaseRemaining = this.selectedMode().inhaleSeconds;
     this.breathProgress = 0;
-    const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
     IntentService.shareBreathingIntent(context, this.selectedMode().name);
     this.liveView.start(this.phase, this.phaseRemaining).then((enabled: boolean) => {
       if (!enabled) {
@@ -288,9 +292,40 @@ struct RelaxationPage {
     }
   }
 
+  private async recordCompletionFeeling(label: string): Promise<void> {
+    this.completionFeeling = label;
+    HapticService.light();
+    const score: number = label === '轻松很多' ? 8 : (label === '一点点' ? 6 : 3);
+    const emotion: string = label === '轻松很多' ? '轻松' : (label === '一点点' ? '平静' : '焦虑');
+    const recordedAt: string = this.completionMoodRecordedAt.length > 0 ?
+      this.completionMoodRecordedAt : new Date().toISOString();
+    const record: MentalHealthRecord = {
+      recordedAt: recordedAt,
+      moodScore: score,
+      moodLabel: label,
+      emotions: [emotion],
+      factors: [],
+      note: '完成云息呼吸后记录',
+      source: 'breathing'
+    };
+    try {
+      if (this.completionMoodRecordId > 0) {
+        record.id = this.completionMoodRecordId;
+        await DatabaseService.updateMentalHealthRecord(record);
+      } else {
+        record.id = await DatabaseService.addMentalHealthRecord(record);
+        this.completionMoodRecordId = record.id;
+        this.completionMoodRecordedAt = recordedAt;
+      }
+      this.showToast('已写入心理状态：' + label);
+    } catch (reason) {
+      this.showToast('感受已选择，但暂时没有写入记录。');
+    }
+  }
+
   private confirmExit(): void {
     if (!this.running) {
-      router.back();
+      this.getUIContext().getRouter().back();
       return;
     }
     this.getUIContext().getPromptAction().showDialog({
@@ -304,7 +339,7 @@ struct RelaxationPage {
       if (result.index === 1) {
         this.clearTimer();
         this.liveView.stop(false);
-        router.back();
+        this.getUIContext().getRouter().back();
       }
     });
   }
@@ -696,9 +731,7 @@ struct RelaxationPage {
     .scale({ x: this.completionFeeling === label ? 1.02 : 1, y: this.completionFeeling === label ? 1.02 : 1 })
     .animation({ duration: 180, curve: Curve.EaseOut })
     .onClick(() => {
-      this.completionFeeling = label;
-      HapticService.light();
-      this.showToast('已记录你的状态：' + label);
+      this.recordCompletionFeeling(label);
     })
   }
 

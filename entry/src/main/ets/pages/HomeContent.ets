@@ -1,10 +1,10 @@
-import { router } from '@kit.ArkUI';
 import {
   AppConstants,
   AppUsage,
   AssessmentRecord,
   DailyQuote,
   ExamInfo,
+  MentalHealthRecord,
   UserProfile
 } from '../common/DataModels';
 import { MemePopup } from '../common/MemePopup';
@@ -36,6 +36,7 @@ export struct HomeContent {
     used: false
   };
   @State consecutiveDays: number = 1;
+  @State mentalRecords: MentalHealthRecord[] = [];
   @State showMeme: boolean = false;
   @State memeAsset: string = 'daily_1';
   @State memeMessage: string = '';
@@ -57,7 +58,7 @@ export struct HomeContent {
     this.applyExamSnapshot();
     this.loadOverview();
     this.entryTimer = setTimeout(() => {
-      animateTo({ duration: 420, curve: Curve.EaseOut }, () => {
+      this.getUIContext().animateTo({ duration: 420, curve: Curve.EaseOut }, () => {
         this.mascotEntered = true;
       });
     }, 80);
@@ -101,6 +102,7 @@ export struct HomeContent {
       const profiles: UserProfile[] = await DatabaseService.getAllUserProfiles();
       const exams: ExamInfo[] = await DatabaseService.getAllExamInfo();
       const assessments: AssessmentRecord[] = await DatabaseService.getAllAssessments();
+      this.mentalRecords = await DatabaseService.getMentalHealthRecords();
       const quotes: DailyQuote[] = await DatabaseService.getAllDailyQuotes();
       if (profiles.length > 0) {
         this.profile = profiles[0];
@@ -196,13 +198,27 @@ export struct HomeContent {
     this.openPage('pages/AssessmentRoutePage');
   }
 
+  private openMentalHealth(): void {
+    this.openPage('pages/MentalHealthPage');
+  }
+
+  private recordedMoodToday(): boolean {
+    if (this.mentalRecords.length === 0) {
+      return false;
+    }
+    const now: Date = new Date();
+    const today: string = now.getFullYear().toString() + '-' +
+      (now.getMonth() + 1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
+    return this.mentalRecords.some((item: MentalHealthRecord) => item.recordedAt.substring(0, 10) === today);
+  }
+
   private openCoach(): void {
     this.openPage('pages/CognitivePage');
   }
 
   private openPage(url: string): void {
     HapticService.light();
-    router.pushUrl({ url: url }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: url }).catch(() => {
       this.getUIContext().getPromptAction().showToast({
         message: '页面暂时没有打开，再试一次？',
         duration: 2500
@@ -374,15 +390,16 @@ export struct HomeContent {
       Row({ space: 10 }) {
         Image($rawfile('kxq_mood_happy.png')).width(32).height(32).objectFit(ImageFit.Contain)
         Column({ space: 3 }) {
-          Text('给心情做个小测验').fontSize(15).fontWeight(FontWeight.Bold).fontColor(UiTokens.TEXT_PRIMARY)
-          Text('了解最近的自己，再安排下一步').fontSize(11).fontColor(UiTokens.TEXT_SECONDARY)
+          Text('心理状态').fontSize(15).fontWeight(FontWeight.Bold).fontColor(UiTokens.TEXT_PRIMARY)
+          Text(this.recordedMoodToday() ? '今天已记录 · 查看心情趋势' : '记录日常感受，看见持续变化')
+            .fontSize(11).fontColor(UiTokens.TEXT_SECONDARY)
         }.alignItems(HorizontalAlign.Start).layoutWeight(1)
-        Text('去测评').fontSize(12).fontWeight(FontWeight.Medium).fontColor(UiTokens.PRIMARY)
+        Text(this.recordedMoodToday() ? '查看' : '去记录').fontSize(12).fontWeight(FontWeight.Medium).fontColor('#348895')
       }.width('100%')
     }
     .width('calc(100% - 4vp)').height(this.contentHeight < 550 ? 54 : 60).padding({ left: 12, right: 12 })
-    .backgroundColor('#EEF5FF').borderRadius(18)
-    .onClick(() => { this.openAssessment(); })
+    .backgroundColor('#EAF7F5').borderRadius(18)
+    .onClick(() => { this.openMentalHealth(); })
   }
 
   @Builder

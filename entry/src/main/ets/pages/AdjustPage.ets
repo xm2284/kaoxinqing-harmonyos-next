@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { AdaptiveLayout } from '../common/AdaptiveLayout';
 
 interface RegulationScene {
@@ -24,7 +23,7 @@ export struct AdjustPage {
   ];
   aboutToAppear(): void { this.active = this.pressureLevel >= 6 ? 0 : 1; }
   private open(route: string): void {
-    router.pushUrl({ url: route }).catch(() => { this.getUIContext().getPromptAction().showToast({ message: '页面暂时没有打开，请重试。' }); });
+    this.getUIContext().getRouter().pushUrl({ url: route }).catch(() => { this.getUIContext().getPromptAction().showToast({ message: '页面暂时没有打开，请重试。' }); });
   }
   build() {
     Scroll() {

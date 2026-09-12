@@ -1,6 +1,5 @@
 import { DemoGrowthService, DemoGrowthRecord } from '../services/DemoGrowthService';
 import { SettingsService } from '../services/SettingsService';
-import { router } from '@kit.ArkUI';
 import { UiTokens } from '../common/UiTokens';
 import { PageHeader } from '../components/PageHeader';
 import { DatabaseService } from '../services/DatabaseService';
@@ -21,7 +20,7 @@ struct GrowthRecordsPage {
   private historyScroller: Scroller = new Scroller();
   private readonly labels: string[] = ['全部', '翻卡', '调节', '重构', '测评'];
   aboutToAppear(): void {
-    const params: RecordRoute = router.getParams() as RecordRoute;
+    const params: RecordRoute = this.getUIContext().getRouter().getParams() as RecordRoute;
     const filter: number = params?.filter ?? 0;
     this.filter = Math.max(0, Math.min(4, filter)); this.load();
   }

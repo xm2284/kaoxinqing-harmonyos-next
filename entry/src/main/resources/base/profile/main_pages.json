@@ -3,6 +3,7 @@
     "pages/SplashPage",
     "pages/Index",
     "pages/AssessmentRoutePage",
+    "pages/MentalHealthPage",
     "pages/GamePage",
     "pages/EvolutionTreePage",
     "pages/RelaxationPage",

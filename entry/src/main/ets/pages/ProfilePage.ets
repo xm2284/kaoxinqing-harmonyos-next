@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import {
   AppConstants,
   AppUsage,
@@ -146,13 +145,13 @@ export struct ProfilePage {
   }
 
   private toggle(section: string): void {
-    animateTo({ duration: 300, curve: Curve.EaseOut }, () => {
+    this.getUIContext().animateTo({ duration: 300, curve: Curve.EaseOut }, () => {
       this.expandedSection = this.expandedSection === section ? '' : section;
     });
   }
 
   private openPage(url: string): void {
-    router.pushUrl({ url: url }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: url }).catch(() => {
       this.showToast('页面暂时没有打开，再试一次？');
     });
   }

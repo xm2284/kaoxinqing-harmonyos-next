@@ -20,11 +20,11 @@ export class SettingsService {
   }
 
   static async commonTools(): Promise<string[]> {
-    if (SettingsService.store === undefined) { return ['breath', 'game', 'chat', 'rest']; }
-    const raw: string = await SettingsService.store.get('common_tools', 'breath,game,chat,rest') as string;
-    const allowed: string[] = ['breath', 'game', 'chat', 'rest', 'records', 'badges'];
+    if (SettingsService.store === undefined) { return ['mental', 'breath', 'chat', 'rest']; }
+    const raw: string = await SettingsService.store.get('common_tools', 'mental,breath,chat,rest') as string;
+    const allowed: string[] = ['mental', 'breath', 'game', 'chat', 'rest', 'records', 'badges'];
     const selected: string[] = raw.split(',').filter((key: string) => allowed.indexOf(key) >= 0);
-    return selected.length > 0 ? selected : ['breath', 'game', 'chat', 'rest'];
+    return selected.length > 0 ? selected : ['mental', 'breath', 'chat', 'rest'];
   }
 
   static async saveCommonTools(keys: string[]): Promise<void> {

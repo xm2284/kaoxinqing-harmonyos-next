@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 import { preferences } from '@kit.ArkData';
 import {
@@ -137,7 +136,7 @@ export struct CognitivePage {
 
   private async checkCoachFirstVisit(): Promise<void> {
     try {
-      const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+      const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
       const store: preferences.Preferences =
         await preferences.getPreferences(context, 'kaoxinqing_onboarding');
       const seenValue: preferences.ValueType = await store.get('coach_multi_agent_intro_v1', false);
@@ -225,7 +224,7 @@ export struct CognitivePage {
         { text: '继续说说', color: AppConstants.COLOR_TEXT_SECONDARY }]
     }).then((result) => {
       this.safetyDialogOpen = false;
-      if (result.index === 0) { router.pushUrl({ url: 'pages/SupportPage' }).catch(() => {
+      if (result.index === 0) { this.getUIContext().getRouter().pushUrl({ url: 'pages/SupportPage' }).catch(() => {
         this.showToast('可直接拨打12356；有迫近危险请拨打120/110。');
       }); }
     }).catch(() => { this.safetyDialogOpen = false; });
@@ -307,7 +306,7 @@ export struct CognitivePage {
       this.listening = false;
       return;
     }
-    const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
     const started: boolean = await this.chatVoice.start(
       context,
       (text: string, isFinal: boolean) => {
@@ -356,7 +355,7 @@ export struct CognitivePage {
       this.affirmationStatus = '录音已停止，可以预览文字并保存';
       return;
     }
-    const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
     this.affirmationPath = context.filesDir + '/affirmation_' + Date.now().toString() + '.pcm';
     this.affirmationTranscript = '';
     this.affirmationStartedAt = Date.now();
@@ -574,7 +573,7 @@ export struct CognitivePage {
         .shadow({ radius: 12, color: '#166BA6D8', offsetY: 4 })
         .onClick(() => {
           HapticService.light();
-          router.back();
+          this.getUIContext().getRouter().back();
         })
 
         Image($rawfile('kxq_ui_chat_wave_mascot.png'))
@@ -761,7 +760,7 @@ export struct CognitivePage {
         .width('100%')
         .height(42)
         .onClick(() => {
-          animateTo({ duration: 300, curve: Curve.EaseOut }, () => {
+          this.getUIContext().animateTo({ duration: 300, curve: Curve.EaseOut }, () => {
             this.affirmationExpanded = !this.affirmationExpanded;
           });
         })

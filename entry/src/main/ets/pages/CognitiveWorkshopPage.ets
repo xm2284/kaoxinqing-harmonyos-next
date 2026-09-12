@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { AppConstants, ThoughtChallenge } from '../common/DataModels';
 import { DatabaseService } from '../services/DatabaseService';
 import { HapticService } from '../services/HapticService';
@@ -25,7 +24,7 @@ struct CognitiveWorkshopPage {
       this.step--;
       return;
     }
-    router.back();
+    this.getUIContext().getRouter().back();
   }
 
   private nextStep(): void {
@@ -88,7 +87,7 @@ struct CognitiveWorkshopPage {
       await DatabaseService.addThoughtChallenge(record);
       HapticService.confirm();
       this.showToast('已保存到思维进化树。');
-      router.back();
+      this.getUIContext().getRouter().back();
     } catch (reason) {
       this.showToast('保存没有完成，内容仍保留在这里。');
     } finally {

@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { AppConstants, ThoughtChallenge } from '../common/DataModels';
 import { DatabaseService } from '../services/DatabaseService';
 import { HapticService } from '../services/HapticService';
@@ -155,7 +154,7 @@ struct EvolutionTreePage {
   }
 
   private openWorkshop(): void {
-    router.pushUrl({ url: 'pages/CognitiveWorkshopPage' }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: 'pages/CognitiveWorkshopPage' }).catch(() => {
       this.showToast('认知重构工坊暂时没有打开，再试一次？');
     });
   }
@@ -244,7 +243,7 @@ struct EvolutionTreePage {
       .border({ width: 1, color: '#D7EAF7' })
       .shadow({ radius: 12, color: '#246EA51A', offsetY: 4 })
       .onClick(() => {
-        router.back();
+        this.getUIContext().getRouter().back();
       })
 
       Text('思维进化树')

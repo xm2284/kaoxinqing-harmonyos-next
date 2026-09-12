@@ -11,6 +11,9 @@
 **/.test
 /.appanalyzer
 
+# 本机大体积备份包
+/backups/
+
 # 构建日志与开发产物
 *.log
 /verification/

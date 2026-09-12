@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI';
 import { AppConstants } from '../common/DataModels';
 import { UiTokens } from '../common/UiTokens';
 import { AppBottomNavigation } from '../components/AppBottomNavigation';
@@ -65,7 +64,7 @@ struct Index {
     }
     const route: string = this.pendingRoute;
     AppStorage.setOrCreate('pendingRoute', '');
-    router.pushUrl({ url: route }).catch(() => {
+    this.getUIContext().getRouter().pushUrl({ url: route }).catch(() => {
       this.getUIContext().getPromptAction().showToast({
         message: '页面暂时没有打开，再试一次？',
         duration: 2500

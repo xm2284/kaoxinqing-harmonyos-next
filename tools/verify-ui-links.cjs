@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..');
 const ets = path.join(root, 'entry/src/main/ets');
 const raw = path.join(root, 'entry/src/main/resources/rawfile');
 const routes = JSON.parse(fs.readFileSync(path.join(root, 'entry/src/main/resources/base/profile/main_pages.json'), 'utf8')).src;
-const pages = ['HomeContent', 'AdjustPage', 'MyPage', 'GamePage', 'RestBreakPage', 'AppSettingsPage', 'HelpPage', 'SupportPage', 'GrowthRecordsPage', 'CountdownSettingPage'];
+const pages = ['HomeContent', 'AdjustPage', 'MyPage', 'MentalHealthPage', 'GamePage', 'RestBreakPage', 'AppSettingsPage', 'HelpPage', 'SupportPage', 'GrowthRecordsPage', 'CountdownSettingPage'];
 let assets = 0, links = 0;
 for (const route of routes) assert.ok(fs.existsSync(path.join(ets, route + '.ets')), 'Missing route: ' + route);
 for (const page of pages) {

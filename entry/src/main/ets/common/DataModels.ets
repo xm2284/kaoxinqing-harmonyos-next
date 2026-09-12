@@ -38,6 +38,18 @@ export interface TrainingRecord {
   duration: number;
 }
 
+/** 一次日常心理状态记录。分数越高表示当下感受越舒展。 */
+export interface MentalHealthRecord {
+  id?: number;
+  recordedAt: string;
+  moodScore: number;
+  moodLabel: string;
+  emotions: string[];
+  factors: string[];
+  note: string;
+  source: string;
+}
+
 export interface ExamScore {
   id?: number;
   subject: string;

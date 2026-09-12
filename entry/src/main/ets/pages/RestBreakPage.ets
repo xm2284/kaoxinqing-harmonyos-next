@@ -1,5 +1,4 @@
 import { common } from '@kit.AbilityKit';
-import { router } from '@kit.ArkUI';
 import { preferences } from '@kit.ArkData';
 import { AppConstants, UserProfile, VideoShare } from '../common/DataModels';
 import { MemePopup } from '../common/MemePopup';
@@ -69,7 +68,7 @@ struct RestBreakPage {
     if (this.selectedSound === key && this.soundPlaying) { await this.ambient.stop().catch(() => {}); return; }
     this.selectedSound = key; this.soundLoading = true;
     try {
-      const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+      const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
       await this.ambient.play(context, 'ambient_' + key + '.wav');
     } catch (reason) { this.soundPlaying = false; this.showToast('声音暂时无法播放，请重试。'); }
     finally { this.soundLoading = false; }
@@ -83,7 +82,7 @@ struct RestBreakPage {
   private confirmExit(): void {
     if (this.pageMode === 1 && !this.resting) { this.pageMode = 0; return; }
     if (!this.resting) {
-      router.back();
+      this.getUIContext().getRouter().back();
       return;
     }
     this.getUIContext().getPromptAction().showDialog({
@@ -96,7 +95,7 @@ struct RestBreakPage {
     }).then((result) => {
       if (result.index === 1) {
         this.finishRest(false).then(() => {
-          router.back();
+          this.getUIContext().getRouter().back();
         });
       }
     });
@@ -132,7 +131,7 @@ struct RestBreakPage {
 
   private async checkFirstVisit(): Promise<void> {
     try {
-      const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+      const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
       const store: preferences.Preferences =
         await preferences.getPreferences(context, 'kaoxinqing_onboarding');
       const seenValue: preferences.ValueType = await store.get('rest_break_intro_v2', false);
@@ -199,7 +198,7 @@ struct RestBreakPage {
   }
 
   private async openVideo(item: VideoShare): Promise<void> {
-    const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
     try {
       await context.openLink('https://www.bilibili.com/video/' + item.bvid);
     } catch (reason) {

@@ -1,7 +1,6 @@
 import { GrowthDonut, GrowthTrend } from '../components/GrowthCharts';
 import { DemoGrowthService, GrowthPoint } from '../services/DemoGrowthService';
-import { router } from '@kit.ArkUI';
-import { AppUsage, AssessmentRecord, CardDrawRecord, ChatMessage, ExamInfo, ThoughtChallenge, TrainingRecord, UserProfile } from '../common/DataModels';
+import { AppUsage, AssessmentRecord, CardDrawRecord, ChatMessage, ExamInfo, MentalHealthRecord, ThoughtChallenge, TrainingRecord, UserProfile } from '../common/DataModels';
 import { AdaptiveLayout } from '../common/AdaptiveLayout';
 import { UiTokens } from '../common/UiTokens';
 import { DatabaseService } from '../services/DatabaseService';
@@ -20,6 +19,7 @@ export struct MyPage {
   @State profile: UserProfile = { nickname: '同学', grade: '', school: '' };
   @State exam: ExamInfo = { name: '', date: '', subjects: [] };
   @State assessments: AssessmentRecord[] = [];
+  @State mentalRecords: MentalHealthRecord[] = [];
   @State trainingCount: number = 0;
   @State challengeCount: number = 0;
   @State drawCount: number = 0;
@@ -28,7 +28,7 @@ export struct MyPage {
   @State minutes: number = 0;
   @State breathCount: number = 0;
   @State restCount: number = 0;
-  @State selectedTools: string[] = ['breath', 'game', 'chat', 'rest'];
+  @State selectedTools: string[] = ['mental', 'breath', 'chat', 'rest'];
   @State draftTools: string[] = [];
   @State editingTools: boolean = false;
   @State savingTools: boolean = false;
@@ -36,6 +36,7 @@ export struct MyPage {
   @State failed: boolean = false;
   private badgeScroller: Scroller = new Scroller();
   private readonly tools: MyTool[] = [
+    { key: 'mental', name: '心理状态', asset: 'kxq_extra_heartbeat.png', route: 'pages/MentalHealthPage' },
     { key: 'breath', name: '云息呼吸', asset: 'kxq_adjust_breath_feature.png', route: 'pages/RelaxationPage' },
     { key: 'game', name: '心晴游戏坊', asset: 'kxq_adjust_game_feature.png', route: 'pages/GamePage' },
     { key: 'chat', name: '听澜心语', asset: 'kxq_ip_sleepy_chat.png', route: 'pages/CognitivePage' },
@@ -52,6 +53,7 @@ export struct MyPage {
       const exams: ExamInfo[] = await DatabaseService.getAllExamInfo();
       this.exam = exams.length > 0 ? exams[0] : { name: '', date: '', subjects: [] };
       this.assessments = await DatabaseService.getAllAssessments();
+      this.mentalRecords = await DatabaseService.getMentalHealthRecords();
       const trainings: TrainingRecord[] = await DatabaseService.getAllTrainingRecords();
       const challenges: ThoughtChallenge[] = await DatabaseService.getAllThoughtChallenges();
       const cards: CardDrawRecord[] = await DatabaseService.getCardDraws();
@@ -69,7 +71,7 @@ export struct MyPage {
   }
   private open(route: string): void {
     if (route === 'badges') { this.sheetMode = 'badges'; this.editingTools = true; return; }
-    router.pushUrl({ url: route }).catch(() => { this.toast('页面暂时没有打开，请重试。'); });
+    this.getUIContext().getRouter().pushUrl({ url: route }).catch(() => { this.toast('页面暂时没有打开，请重试。'); });
   }
   private toast(message: string): void { this.getUIContext().getPromptAction().showToast({ message: message }); }
   private commonTools(): MyTool[] { return this.tools.filter((item: MyTool) => this.selectedTools.indexOf(item.key) >= 0); }
@@ -88,7 +90,7 @@ export struct MyPage {
   }
   private badges(): BadgeItem[] {
     return [
-      { name: '初识自己', value: this.demo ? 7 : this.assessments.length, target: 1, unit: '次测评', asset: 'badge_book.svg' },
+      { name: '初识自己', value: this.demo ? 7 : this.mentalRecords.length + this.assessments.length, target: 1, unit: '次心理记录', asset: 'badge_book.svg' },
       { name: '翻开心晴', value: this.demo ? DemoGrowthService.CARDS : this.drawCount, target: 6, unit: '张翻卡', asset: 'badge_card.svg' },
       { name: '认真休息', value: this.demo ? DemoGrowthService.RESTS : this.restCount, target: 1, unit: '次休息', asset: 'badge_leaf.svg' },
       { name: '自在呼吸', value: this.demo ? DemoGrowthService.BREATHS : this.breathCount, target: 3, unit: '次呼吸', asset: 'badge_leaf.svg' },
@@ -143,7 +145,7 @@ export struct MyPage {
           if (this.demo) { Text('示例展示中 · 数据与勋章不计入真实成长').fontSize(11).fontColor('#9A6D2E').width('100%') }
           Divider().color('#EAF0F7')
           Row() {
-            this.Stat(this.demo ? 7 : this.assessments.length, '测评记录'); this.Stat(this.demo ? 13 : this.trainingCount, '调节练习')
+            this.Stat(this.demo ? 7 : this.mentalRecords.length, '心情记录'); this.Stat(this.demo ? 13 : this.trainingCount, '调节练习')
             this.Stat(this.demo ? 7 : this.consecutiveDays, '连续陪伴'); this.Stat(this.demo ? 90 : this.minutes, '练习分钟')
           }.width('100%')
         }.width('100%').padding(16).backgroundColor(Color.White).borderRadius(22)
@@ -177,6 +179,7 @@ export struct MyPage {
           Text('彩色为已点亮，灰色为待解锁；点按查看条件。').fontSize(11).fontColor(UiTokens.TEXT_SECONDARY)
         }.width('100%').padding(14).backgroundColor(Color.White).borderRadius(22)
         Column() {
+          this.LinkRow('心理状态', '日常心情、影响因素与持续趋势', 'pages/MentalHealthPage')
           this.LinkRow('目标与计划', this.exam.name.length > 0 ? this.exam.name + ' · 距考试 ' + AdaptiveLayout.daysUntil(this.exam.date).toString() + ' 天' : '设置考试日期与复习科目', 'pages/CountdownSettingPage')
           this.LinkRow('我的记录', '翻卡、调节、重构与测评都在这里', 'pages/GrowthRecordsPage')
           this.LinkRow('考后分析', '记录各科成绩与变化', 'pages/AnalysisPage')

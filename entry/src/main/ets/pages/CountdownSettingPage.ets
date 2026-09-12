@@ -1,5 +1,4 @@
 import { common } from '@kit.AbilityKit';
-import { router } from '@kit.ArkUI';
 import { AppConstants, ExamInfo, StudyTask } from '../common/DataModels';
 import { AdaptiveLayout } from '../common/AdaptiveLayout';
 import { UiTokens } from '../common/UiTokens';
@@ -200,7 +199,7 @@ struct CountdownSettingPage {
 
   private async syncToDevices(): Promise<void> {
     try {
-      const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+      const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
       await this.distribute.init(context); const primary: ExamInfo | undefined = this.primaryExam();
       await this.distribute.put('examInfoJson', primary === undefined ? '' : JSON.stringify(primary));
       await this.distribute.put('examPlanUpdatedAt', new Date().toISOString()); this.showToast('已同步到可接续设备。');
@@ -227,7 +226,7 @@ struct CountdownSettingPage {
   @Builder TopBar() {
     Row({ space: 12 }) {
       Button({ type: ButtonType.Circle }) { Image($rawfile('back_arrow.svg')).width(23).height(23) }
-        .width(44).height(44).backgroundColor(Color.White).accessibilityText('返回').onClick(() => { router.back(); })
+        .width(44).height(44).backgroundColor(Color.White).accessibilityText('返回').onClick(() => { this.getUIContext().getRouter().back(); })
       Column({ space: 3 }) { Text('考试与计划').fontSize(21).fontWeight(FontWeight.Bold).fontColor(UiTokens.TEXT_PRIMARY)
         Text(this.exams.length.toString() + ' 个计划 · 重点优先').fontSize(11).fontColor(UiTokens.TEXT_SECONDARY) }
         .layoutWeight(1).alignItems(HorizontalAlign.Start)
