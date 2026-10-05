@@ -15,6 +15,10 @@
     </filter>
     <style>
       .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes t-bloom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+      .t-bloom { transform-origin: 300px 118px; animation: t-bloom 3s ease-in-out infinite; }
+      .t-bloom.b2 { animation-delay: 1s; }
+      .t-bloom.b3 { animation-delay: 2s; }
     </style>
   </defs>
   <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#t-rough)"/>

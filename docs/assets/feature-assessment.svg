@@ -15,6 +15,10 @@
     </filter>
     <style>
       .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes a-needle { 0%,100% { transform: rotate(-34deg); } 50% { transform: rotate(18deg); } }
+      .a-needle { transform-origin: 168px 236px; animation: a-needle 5s ease-in-out infinite; }
+      @keyframes a-blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+      .a-blink { animation: a-blink 1.6s ease-in-out infinite; }
     </style>
   </defs>
   <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#a-rough)"/>

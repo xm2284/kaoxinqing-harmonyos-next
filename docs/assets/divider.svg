@@ -5,6 +5,12 @@
       <feTurbulence type="fractalNoise" baseFrequency="0.02 0.05" numOctaves="2" seed="77" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
+    <style>
+      @keyframes d-breathe { 0%,100% { transform: scale(.8); opacity:.6; } 50% { transform: scale(1.1); opacity:1; } }
+      .d-breathe { transform-origin: 600px 35px; animation: d-breathe 6s ease-in-out infinite; }
+      @keyframes d-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+      .d-bob { animation: d-bob 2.8s ease-in-out infinite; }
+    </style>
   </defs>
 
   <path d="M30 35 q 40 -18 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0"

@@ -15,7 +15,11 @@
     </filter>
     <style>
       .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
-      .p-flow { stroke-dasharray: 9 9; }
+      @keyframes p-flow { to { stroke-dashoffset: -40; } }
+      .p-flow { stroke-dasharray: 9 9; animation: p-flow 1.6s linear infinite; }
+      @keyframes p-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      .p-bob { animation: p-bob 3s ease-in-out infinite; }
+      .p-bob.b2 { animation-delay: .5s; } .p-bob.b3 { animation-delay: 1s; } .p-bob.b4 { animation-delay: 1.5s; } .p-bob.b5 { animation-delay: 2s; }
     </style>
   </defs>
   <rect x="4" y="4" width="952" height="372" rx="24" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#p-rough)"/>
