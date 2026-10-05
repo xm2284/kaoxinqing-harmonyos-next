@@ -1,0 +1,53 @@
+name: Mirror to Gitee
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    # 镜像/网络偶发问题不应把工作流标记为失败（避免失败通知）
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Gitee repo if missing
+        continue-on-error: true
+        shell: bash
+        run: |
+          curl -sS -X POST "https://gitee.com/api/v5/user/repos" \
+            -H "Content-Type: application/json" \
+            -d "{\"access_token\":\"${{ secrets.GITEE_TOKEN }}\",\"name\":\"${{ github.event.repository.name }}\",\"auto_init\":false,\"private\":false}" \
+            --max-time 30 >/dev/null 2>&1 || echo "WARN: create skipped (repo may already exist)"
+
+      - name: Mirror push to Gitee
+        continue-on-error: true
+        shell: bash
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          USER="${{ secrets.GITEE_USERNAME }}"
+          URL="https://${USER}:${{ secrets.GITEE_TOKEN }}@gitee.com/${USER}/${REPO}.git"
+          git remote remove gitee 2>/dev/null || true
+          git remote add gitee "$URL"
+          # 只推送分支与 tag，避免把 refs/remotes/* 当成 hidden ref 推送而被拒绝
+          git push --prune gitee "+refs/heads/*:refs/heads/*" "+refs/tags/*:refs/tags/*"
+
+      - name: Sync description and project labels to Gitee
+        if: always()
+        continue-on-error: true
+        shell: bash
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          GITEE_USERNAME: ${{ secrets.GITEE_USERNAME }}
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: python3 .github/scripts/sync_gitee_meta.py
