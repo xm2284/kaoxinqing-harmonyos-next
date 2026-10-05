@@ -19,107 +19,80 @@
     </linearGradient>
     <style>
       .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
-      @keyframes h-rays { to { transform: rotate(360deg); } }
-      .h-rays { transform-origin: 150px 110px; animation: h-rays 40s linear infinite; }
-      @keyframes h-breathe { 0%,100% { transform: scale(.72); opacity:.55; } 50% { transform: scale(1); opacity:.9; } }
-      .h-breathe { transform-origin: 250px 300px; animation: h-breathe 6s ease-in-out infinite; }
-      @keyframes h-float { 0% { transform: translateY(0); opacity:0; } 30% { opacity:.9; } 100% { transform: translateY(-30px); opacity:0; } }
-      .h-float { animation: h-float 4s ease-in infinite; }
-      .h-float.f2 { animation-delay: 1.3s; }
-      .h-float.f3 { animation-delay: 2.6s; }
-      @keyframes h-pop { 0% { transform: scale(1); } 8% { transform: scale(1.05); } 16%,100% { transform: scale(1); } }
-      .h-pop { transform-origin: 800px 150px; animation: h-pop 3.6s ease-in-out infinite; }
-      @keyframes h-blink { 0%,100% { opacity:1; } 50% { opacity:.25; } }
-      .h-blink { animation: h-blink 1.6s ease-in-out infinite; }
     </style>
   </defs>
 
   <rect x="5" y="5" width="990" height="420" rx="26" fill="url(#h-sky)" stroke="#2A3550" stroke-width="3.5" filter="url(#h-rough)"/>
   <rect x="5" y="5" width="990" height="420" rx="26" fill="#ffffff" filter="url(#h-paper)"/>
 
-  <!-- sun -->
-  <g class="h-rays" stroke="#FFD76A" stroke-width="4" stroke-linecap="round" filter="url(#h-rough2)">
-    <path d="M150 60 l 0 16 M150 160 l 0 -16 M100 110 l 16 0 M200 110 l -16 0 M115 75 l 12 12 M185 145 l -12 -12 M185 75 l -12 12 M115 145 l 12 -12"/>
-  </g>
-  <circle cx="150" cy="110" r="30" fill="#FFD76A" stroke="#2A3550" stroke-width="3.2" filter="url(#h-rough)"/>
-
-  <!-- breathing ring -->
-  <g class="h-breathe" fill="none" stroke="#38C8C1" stroke-width="3.4">
-    <circle cx="250" cy="300" r="46"/>
-    <circle cx="250" cy="300" r="34" stroke="#8FE4DE"/>
-  </g>
-
-  <!-- character reading a book -->
+  <!-- soft breathing motif -->
   <g filter="url(#h-rough2)">
-    <ellipse cx="150" cy="352" rx="70" ry="18" fill="#E4EEFF" stroke="#2A3550" stroke-width="3"/>
-    <path d="M104 344 q 0 -70 46 -70 q 46 0 46 70 z" fill="#DFF3EA" stroke="#2A3550" stroke-width="3"/>
-    <circle cx="150" cy="252" r="30" fill="#FFE7D6" stroke="#2A3550" stroke-width="3"/>
-    <path d="M122 246 q 6 -34 28 -34 q 22 0 28 34 q -13 -16 -28 -13 q -16 3 -28 13z" fill="#4A3F35" stroke="#2A3550" stroke-width="2.8"/>
-    <circle cx="139" cy="256" r="3.2" fill="#2A3550"/>
-    <circle cx="161" cy="256" r="3.2" fill="#2A3550"/>
-    <path d="M139 266 q 11 9 22 0" fill="none" stroke="#2A3550" stroke-width="2.6" stroke-linecap="round"/>
-    <circle cx="128" cy="264" r="5" fill="#FFB3A7" opacity=".8"/>
-    <circle cx="172" cy="264" r="5" fill="#FFB3A7" opacity=".8"/>
-    <path d="M108 312 q 22 14 42 6" fill="none" stroke="#2A3550" stroke-width="3" stroke-linecap="round"/>
-    <path d="M192 312 q -22 14 -42 6" fill="none" stroke="#2A3550" stroke-width="3" stroke-linecap="round"/>
-    <path d="M116 322 l 34 -10 34 10 -34 12z" fill="#2F80FF" stroke="#2A3550" stroke-width="2.6"/>
-    <path d="M150 312 l 0 12" stroke="#2A3550" stroke-width="2.2"/>
+    <circle cx="170" cy="282" r="82" fill="none" stroke="#BFE8DA" stroke-width="3" stroke-dasharray="10 10"/>
+    <circle cx="170" cy="282" r="62" fill="#EAF7EE" stroke="#2A3550" stroke-width="3.2"/>
+    <circle cx="170" cy="282" r="44" fill="none" stroke="#8FE4DE" stroke-width="3"/>
+    <path d="M170 254 c -8 -12 -26 -10 -26 4 c 0 12 18 20 26 32 c 8 -12 26 -20 26 -32 c 0 -14 -18 -16 -26 -4z" fill="#FF8B84" stroke="#2A3550" stroke-width="2.6"/>
   </g>
 
-  <!-- floating hearts / leaves -->
-  <g fill="#FF8B84" filter="url(#h-rough2)">
-    <path class="h-float" d="M300 260 c -6 -8 -20 -6 -20 4 c 0 8 12 12 20 20 c 8 -8 20 -12 20 -20 c 0 -10 -14 -12 -20 -4z"/>
+  <!-- sun -->
+  <g stroke="#FFD76A" stroke-width="4" stroke-linecap="round" filter="url(#h-rough2)">
+    <path d="M150 44 l 0 14 M150 146 l 0 -14 M99 95 l 14 0 M201 95 l -14 0 M114 59 l 11 11 M186 131 l -11 -11 M186 59 l -11 11 M114 131 l 11 -11"/>
   </g>
-  <g fill="#34C759" filter="url(#h-rough2)">
-    <path class="h-float f2" d="M338 300 q 16 -6 24 -24 q -20 2 -24 24z"/>
-  </g>
-  <g fill="#38C8C1" filter="url(#h-rough2)">
-    <circle class="h-float f3" cx="286" cy="316" r="7"/>
+  <circle cx="150" cy="95" r="30" fill="#FFD76A" stroke="#2A3550" stroke-width="3.2" filter="url(#h-rough)"/>
+
+  <!-- small plant -->
+  <g filter="url(#h-rough2)">
+    <path d="M64 360 q 6 -34 6 -44 h 40 q 0 12 6 44 z" fill="#FFE0B8" stroke="#2A3550" stroke-width="3"/>
+    <path d="M90 316 q 0 -34 -18 -44 q -6 30 18 44z" fill="#34C759" stroke="#2A3550" stroke-width="2.6"/>
+    <path d="M90 316 q 2 -30 22 -38 q 4 28 -22 38z" fill="#6BD98A" stroke="#2A3550" stroke-width="2.6"/>
   </g>
 
   <!-- title -->
   <g class="hw" filter="url(#h-rough2)">
-    <text x="372" y="140" font-size="66" font-weight="700" fill="#2F80FF">考心晴</text>
-    <text x="376" y="182" font-size="24" fill="#4A5872">备考路上的温柔陪伴 · 把压力变成小步骤</text>
-    <path d="M376 196 q 150 8 300 0" fill="none" stroke="#38C8C1" stroke-width="4" stroke-linecap="round"/>
+    <text x="340" y="150" font-size="64" font-weight="700" fill="#2F80FF">考心晴</text>
+    <text x="344" y="196" font-size="21" fill="#4A5872">考前的每一分不安，都被温柔接住</text>
+    <path d="M344 208 q 150 8 300 0" fill="none" stroke="#38C8C1" stroke-width="4" stroke-linecap="round"/>
   </g>
 
-  <!-- tag chips -->
+  <!-- feature chips -->
   <g class="hw" filter="url(#h-rough2)">
     <g stroke="#2A3550" stroke-width="2.2">
-      <rect x="376" y="216" width="104" height="38" rx="12" fill="#EAF4FF"/>
-      <rect x="490" y="216" width="104" height="38" rx="12" fill="#EAF7EE"/>
-      <rect x="604" y="216" width="150" height="38" rx="12" fill="#F1ECFF"/>
+      <rect x="344" y="224" width="104" height="38" rx="12" fill="#EAF4FF"/>
+      <rect x="458" y="224" width="104" height="38" rx="12" fill="#EAF7EE"/>
+      <rect x="572" y="224" width="150" height="38" rx="12" fill="#F1ECFF"/>
+      <rect x="344" y="272" width="104" height="38" rx="12" fill="#FFF3E6"/>
+      <rect x="458" y="272" width="104" height="38" rx="12" fill="#EAF4FF"/>
     </g>
-    <text x="394" y="241" font-size="17" fill="#2A3550">考试倒计时</text>
-    <text x="508" y="241" font-size="17" fill="#2A3550">压力测评</text>
-    <text x="622" y="241" font-size="17" fill="#2A3550">CBT 认知调节</text>
-    <g stroke="#2A3550" stroke-width="2.2">
-      <rect x="376" y="264" width="104" height="38" rx="12" fill="#FFF3E6"/>
-      <rect x="490" y="264" width="104" height="38" rx="12" fill="#EAF4FF"/>
-    </g>
-    <text x="394" y="289" font-size="17" fill="#2A3550">呼吸训练</text>
-    <text x="508" y="289" font-size="17" fill="#2A3550">心语陪伴</text>
+    <text x="362" y="249" font-size="16" fill="#2A3550">考试倒计时</text>
+    <text x="476" y="249" font-size="16" fill="#2A3550">压力测评</text>
+    <text x="590" y="249" font-size="16" fill="#2A3550">CBT 认知调节</text>
+    <text x="362" y="297" font-size="16" fill="#2A3550">呼吸训练</text>
+    <text x="476" y="297" font-size="16" fill="#2A3550">心语陪伴</text>
   </g>
 
-  <!-- countdown card -->
-  <g filter="url(#h-rough)" >
-    <rect x="790" y="250" width="170" height="110" rx="18" fill="#EAF4FF" stroke="#2A3550" stroke-width="3.2"/>
+  <!-- countdown / stress card -->
+  <g filter="url(#h-rough)">
+    <rect x="748" y="104" width="208" height="180" rx="20" fill="#EAF4FF" stroke="#2A3550" stroke-width="3.2"/>
   </g>
   <g class="hw" filter="url(#h-rough2)">
-    <text x="810" y="286" font-size="15" fill="#4A5872">距考试还有</text>
-    <text x="810" y="330" font-size="40" font-weight="700" fill="#2F80FF">30</text>
-    <text x="858" y="330" font-size="20" fill="#4A5872">天</text>
-    <circle cx="930" cy="272" r="6" fill="#FF8B84" class="h-blink"/>
+    <text x="770" y="146" font-size="15" fill="#4A5872">距考试还有</text>
+    <text x="766" y="210" font-size="52" font-weight="700" fill="#2F80FF">30</text>
+    <text x="836" y="210" font-size="22" fill="#4A5872">天</text>
+    <path d="M770 228 h 166" stroke="#2A3550" stroke-width="2" stroke-dasharray="6 6"/>
+    <text x="770" y="260" font-size="15" fill="#4A5872">压力指数</text>
+    <text x="856" y="260" font-size="24" font-weight="700" fill="#FF8B84">38</text>
+    <circle cx="936" cy="126" r="6" fill="#FF8B84"/>
   </g>
 
   <!-- chat bubble -->
-  <g class="h-pop" filter="url(#h-rough2)">
-    <rect x="600" y="80" width="360" height="64" rx="16" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
-    <path d="M636 144 l -16 20 4 -22z" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
-    <g class="hw">
-      <text x="622" y="110" font-size="18" fill="#2F80FF">听澜：别怕，我们一步一步来</text>
-      <text x="622" y="132" font-size="14" fill="#4A5872">今天只做一件小事，就已经很棒了</text>
-    </g>
+  <g filter="url(#h-rough2)">
+    <rect x="690" y="308" width="266" height="58" rx="14" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
+    <path d="M706 366 l -14 16 3 -18z" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
+    <text x="710" y="343" font-size="17" fill="#2F80FF" class="hw">听澜：别怕，我们一步一步来</text>
+  </g>
+
+  <!-- tiny doodles -->
+  <g stroke="#F2C14E" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#h-rough2)">
+    <path d="M300 330 q 14 -10 26 2" stroke="#38C8C1"/>
+    <path d="M660 96 l 0 12 M654 102 l 12 0" stroke="#FFB3A7"/>
   </g>
 </svg>
