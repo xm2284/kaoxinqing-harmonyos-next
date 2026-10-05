@@ -15,10 +15,6 @@
     </filter>
     <style>
       .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
-      @keyframes c-tick { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
-      .c-tick { transform-origin: 190px 210px; animation: c-tick 2s ease-in-out infinite; }
-      @keyframes c-blink { 0%,100% { opacity:1; } 50% { opacity:.25; } }
-      .c-blink { animation: c-blink 1.5s ease-in-out infinite; }
     </style>
   </defs>
   <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#c-rough)"/>
