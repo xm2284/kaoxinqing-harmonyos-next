@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340" role="img" aria-label="压力测评">
+  <title>压力测评</title>
+  <defs>
+    <filter id="a-rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.016 0.022" numOctaves="2" seed="31" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="a-rough2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="a-paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.07 0"/>
+    </filter>
+    <style>
+      .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes a-needle { 0%,100% { transform: rotate(-34deg); } 50% { transform: rotate(18deg); } }
+      .a-needle { transform-origin: 168px 236px; animation: a-needle 5s ease-in-out infinite; }
+      @keyframes a-blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+      .a-blink { animation: a-blink 1.6s ease-in-out infinite; }
+    </style>
+  </defs>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#a-rough)"/>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#fff" filter="url(#a-paper)"/>
+  <rect x="440" y="12" width="86" height="26" rx="3" fill="#F1ECFF" stroke="#2A3550" stroke-width="2" transform="rotate(5 483 25)" filter="url(#a-rough2)" opacity=".9"/>
+  <g class="hw" filter="url(#a-rough2)">
+    <text x="150" y="58" font-size="30" font-weight="700" fill="#2A3550">② 压力测评</text>
+    <path d="M150 70 q 90 8 180 0" fill="none" stroke="#7D61DA" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- gauge -->
+  <g filter="url(#a-rough2)">
+    <path d="M76 240 a 92 92 0 0 1 184 0" fill="none" stroke="#2A3550" stroke-width="3.4"/>
+    <path d="M76 240 a 92 92 0 0 1 55 -84" fill="none" stroke="#34C759" stroke-width="14" opacity=".85"/>
+    <path d="M131 156 a 92 92 0 0 1 55 -8" fill="none" stroke="#FFD76A" stroke-width="14" opacity=".9"/>
+    <path d="M186 148 a 92 92 0 0 1 74 92" fill="none" stroke="#FF8B84" stroke-width="14" opacity=".9"/>
+  </g>
+  <g class="a-needle" filter="url(#a-rough2)">
+    <line x1="168" y1="236" x2="168" y2="152" stroke="#2A3550" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="168" cy="236" r="9" fill="#fff" stroke="#2A3550" stroke-width="3.4"/>
+  </g>
+  <g class="hw" filter="url(#a-rough2)">
+    <text x="120" y="176" font-size="13" fill="#2A3550">轻</text>
+    <text x="206" y="176" font-size="13" fill="#2A3550">重</text>
+    <text x="128" y="276" font-size="22" font-weight="700" fill="#7D61DA">压力指数</text>
+    <text x="262" y="278" font-size="30" font-weight="700" fill="#FF8B84">38</text>
+  </g>
+
+  <!-- clipboard -->
+  <g filter="url(#a-rough2)">
+    <rect x="330" y="120" width="190" height="176" rx="16" fill="#EAF7EE" stroke="#2A3550" stroke-width="3.4"/>
+    <rect x="392" y="110" width="64" height="22" rx="8" fill="#FFD76A" stroke="#2A3550" stroke-width="3"/>
+  </g>
+  <g class="hw" filter="url(#a-rough2)">
+    <text x="350" y="168" font-size="16" fill="#2A3550">最近 7 天自评</text>
+    <g stroke="#2A3550" stroke-width="2.4" fill="#fff">
+      <rect x="350" y="182" width="150" height="26" rx="8"/>
+      <rect x="350" y="216" width="150" height="26" rx="8"/>
+      <rect x="350" y="250" width="150" height="26" rx="8"/>
+    </g>
+    <circle cx="368" cy="195" r="6" fill="#34C759"/>
+    <circle cx="368" cy="229" r="6" fill="#FFD76A"/>
+    <circle cx="368" cy="263" r="6" fill="#FF8B84" class="a-blink"/>
+    <text x="384" y="200" font-size="13" fill="#4A5872">周一 · 32</text>
+    <text x="384" y="234" font-size="13" fill="#4A5872">周二 · 45</text>
+    <text x="384" y="268" font-size="13" fill="#4A5872">今天 · 38</text>
+  </g>
+  <g stroke="#38C8C1" stroke-width="3.4" fill="none" stroke-linecap="round" filter="url(#a-rough2)">
+    <path d="M40 300 q 18 10 36 0"/>
+  </g>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340" role="img" aria-label="思维进化树">
+  <title>思维进化树</title>
+  <defs>
+    <filter id="t-rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.016 0.022" numOctaves="2" seed="71" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="t-rough2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="23" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="t-paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.07 0"/>
+    </filter>
+    <style>
+      .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes t-bloom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+      .t-bloom { transform-origin: 300px 118px; animation: t-bloom 3s ease-in-out infinite; }
+      .t-bloom.b2 { animation-delay: 1s; }
+      .t-bloom.b3 { animation-delay: 2s; }
+    </style>
+  </defs>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#t-rough)"/>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#fff" filter="url(#t-paper)"/>
+  <rect x="34" y="12" width="86" height="26" rx="3" fill="#EAF7EE" stroke="#2A3550" stroke-width="2" transform="rotate(-5 77 25)" filter="url(#t-rough2)" opacity=".9"/>
+  <g class="hw" filter="url(#t-rough2)">
+    <text x="150" y="58" font-size="30" font-weight="700" fill="#2A3550">⑥ 思维进化树</text>
+    <path d="M150 70 q 100 8 200 0" fill="none" stroke="#34C759" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- tree -->
+  <g filter="url(#t-rough)">
+    <path d="M300 320 q -6 -70 -2 -110 q 2 -30 2 -110" fill="none" stroke="#8A6B4A" stroke-width="16" stroke-linecap="round"/>
+    <path d="M300 250 q -46 -22 -66 -60" fill="none" stroke="#8A6B4A" stroke-width="10" stroke-linecap="round"/>
+    <path d="M300 236 q 48 -20 68 -58" fill="none" stroke="#8A6B4A" stroke-width="10" stroke-linecap="round"/>
+    <path d="M300 190 q -34 -14 -50 -44" fill="none" stroke="#8A6B4A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <!-- canopy -->
+  <g filter="url(#t-rough2)" opacity=".95">
+    <circle cx="300" cy="120" r="60" fill="#DFF3EA" stroke="#2A3550" stroke-width="3"/>
+    <circle cx="234" cy="170" r="40" fill="#E4F6E6" stroke="#2A3550" stroke-width="3"/>
+    <circle cx="368" cy="166" r="42" fill="#E4F6E6" stroke="#2A3550" stroke-width="3"/>
+  </g>
+  <!-- blossoms -->
+  <g class="t-bloom" filter="url(#t-rough2)">
+    <circle cx="300" cy="118" r="12" fill="#FFD76A" stroke="#2A3550" stroke-width="2.6"/>
+  </g>
+  <g class="t-bloom b2" filter="url(#t-rough2)">
+    <circle cx="234" cy="168" r="10" fill="#FFB3A7" stroke="#2A3550" stroke-width="2.6"/>
+  </g>
+  <g class="t-bloom b3" filter="url(#t-rough2)">
+    <circle cx="366" cy="164" r="10" fill="#9FD8FF" stroke="#2A3550" stroke-width="2.6"/>
+  </g>
+  <g fill="#34C759" filter="url(#t-rough2)">
+    <path d="M262 214 q 14 -6 20 -22 q -18 2 -20 22z"/>
+    <path d="M338 226 q 14 -6 20 -22 q -18 2 -20 22z"/>
+  </g>
+
+  <!-- progress legend -->
+  <g class="hw" filter="url(#t-rough2)">
+    <g stroke="#2A3550" stroke-width="2.2" fill="#fff">
+      <rect x="392" y="150" width="140" height="130" rx="14"/>
+    </g>
+    <circle cx="410" cy="176" r="7" fill="#DFF3EA" stroke="#2A3550" stroke-width="2"/>
+    <text x="426" y="181" font-size="13" fill="#4A5872">萌芽</text>
+    <circle cx="410" cy="208" r="7" fill="#9FE3B0" stroke="#2A3550" stroke-width="2"/>
+    <text x="426" y="213" font-size="13" fill="#4A5872">生长</text>
+    <circle cx="410" cy="240" r="7" fill="#FFD76A" stroke="#2A3550" stroke-width="2"/>
+    <text x="426" y="245" font-size="13" fill="#4A5872">开花</text>
+    <text x="404" y="270" font-size="12" fill="#8A98AA">记录点亮</text>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340" role="img" aria-label="云息呼吸训练">
+  <title>云息呼吸训练</title>
+  <defs>
+    <filter id="b-rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.016 0.022" numOctaves="2" seed="51" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="b-rough2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="15" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="b-paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.07 0"/>
+    </filter>
+    <style>
+      .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes b-inhale { 0%,100% { transform: scale(.62); } 45%,55% { transform: scale(1); } }
+      .b-ring { transform-origin: 180px 208px; animation: b-inhale 8s ease-in-out infinite; }
+      .b-ring.r2 { animation-delay: .35s; }
+      .b-ring.r3 { animation-delay: .7s; }
+      @keyframes b-text { 0%,45% { opacity:1; } 55%,100% { opacity:0; } }
+      .b-inhale { animation: b-text 8s ease-in-out infinite; }
+      @keyframes b-text2 { 0%,45% { opacity:0; } 55%,100% { opacity:1; } }
+      .b-exhale { animation: b-text2 8s ease-in-out infinite; }
+      @keyframes b-slide { 0% { width:12px; } 100% { width:120px; } }
+      .b-bar { animation: b-slide 8s ease-in-out infinite alternate; }
+    </style>
+  </defs>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#b-rough)"/>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#fff" filter="url(#b-paper)"/>
+  <rect x="34" y="12" width="86" height="26" rx="3" fill="#EAF7EE" stroke="#2A3550" stroke-width="2" transform="rotate(-5 77 25)" filter="url(#b-rough2)" opacity=".9"/>
+  <g class="hw" filter="url(#b-rough2)">
+    <text x="150" y="58" font-size="30" font-weight="700" fill="#2A3550">④ 云息呼吸</text>
+    <path d="M150 70 q 90 8 180 0" fill="none" stroke="#34C759" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- breathing rings -->
+  <g class="b-ring r3" fill="none" stroke="#BFE8DA" stroke-width="3"><circle cx="180" cy="208" r="86"/></g>
+  <g class="b-ring r2" fill="none" stroke="#8FE4DE" stroke-width="3"><circle cx="180" cy="208" r="66"/></g>
+  <g class="b-ring" filter="url(#b-rough2)">
+    <circle cx="180" cy="208" r="46" fill="#DFF3EA" stroke="#2A3550" stroke-width="3.4"/>
+  </g>
+  <g class="hw" filter="url(#b-rough2)">
+    <text class="b-inhale" x="150" y="214" font-size="20" fill="#1E5C43">吸气</text>
+    <text class="b-exhale" x="150" y="214" font-size="20" fill="#1E5C43">呼气</text>
+  </g>
+  <g class="hw" filter="url(#b-rough2)">
+    <text x="132" y="320" font-size="14" fill="#4A5872">4-7-8 · 方块 · 快速放松</text>
+  </g>
+
+  <!-- controls card -->
+  <g filter="url(#b-rough2)">
+    <rect x="300" y="120" width="220" height="176" rx="16" fill="#EAF4FF" stroke="#2A3550" stroke-width="3.4"/>
+  </g>
+  <g class="hw" filter="url(#b-rough2)">
+    <text x="322" y="156" font-size="16" font-weight="700" fill="#2A3550">实况窗 · Live View</text>
+    <text x="322" y="184" font-size="14" fill="#4A5872">阶段：吸气 4s</text>
+    <rect x="322" y="198" width="176" height="14" rx="7" fill="#fff" stroke="#2A3550" stroke-width="2"/>
+    <rect x="326" y="201" width="12" height="8" rx="4" fill="#38C8C1">
+      <animate attributeName="width" values="12;120;12" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="322" y="240" font-size="14" fill="#4A5872">剩余：03:20</text>
+    <text x="322" y="268" font-size="14" fill="#4A5872">完成 2 / 8 组</text>
+  </g>
+  <g stroke="#38C8C1" stroke-width="3.2" fill="none" stroke-linecap="round" filter="url(#b-rough2)">
+    <path d="M300 300 q 16 -12 30 2"/>
+  </g>
+</svg>

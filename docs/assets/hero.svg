@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" width="1000" height="430" role="img" aria-label="考心晴 · 基于 HarmonyOS NEXT 的考试焦虑智能调节助手">
+  <title>考心晴 · 考试焦虑智能调节助手</title>
+  <defs>
+    <filter id="h-rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="h-rough2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="h-paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.07 0"/>
+    </filter>
+    <linearGradient id="h-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7FAFF"/>
+      <stop offset="1" stop-color="#E9F2FF"/>
+    </linearGradient>
+    <style>
+      .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes h-rays { to { transform: rotate(360deg); } }
+      .h-rays { transform-origin: 150px 110px; animation: h-rays 40s linear infinite; }
+      @keyframes h-breathe { 0%,100% { transform: scale(.72); opacity:.55; } 50% { transform: scale(1); opacity:.9; } }
+      .h-breathe { transform-origin: 250px 300px; animation: h-breathe 6s ease-in-out infinite; }
+      @keyframes h-float { 0% { transform: translateY(0); opacity:0; } 30% { opacity:.9; } 100% { transform: translateY(-30px); opacity:0; } }
+      .h-float { animation: h-float 4s ease-in infinite; }
+      .h-float.f2 { animation-delay: 1.3s; }
+      .h-float.f3 { animation-delay: 2.6s; }
+      @keyframes h-pop { 0% { transform: scale(1); } 8% { transform: scale(1.05); } 16%,100% { transform: scale(1); } }
+      .h-pop { transform-origin: 800px 150px; animation: h-pop 3.6s ease-in-out infinite; }
+      @keyframes h-blink { 0%,100% { opacity:1; } 50% { opacity:.25; } }
+      .h-blink { animation: h-blink 1.6s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <rect x="5" y="5" width="990" height="420" rx="26" fill="url(#h-sky)" stroke="#2A3550" stroke-width="3.5" filter="url(#h-rough)"/>
+  <rect x="5" y="5" width="990" height="420" rx="26" fill="#ffffff" filter="url(#h-paper)"/>
+
+  <!-- sun -->
+  <g class="h-rays" stroke="#FFD76A" stroke-width="4" stroke-linecap="round" filter="url(#h-rough2)">
+    <path d="M150 60 l 0 16 M150 160 l 0 -16 M100 110 l 16 0 M200 110 l -16 0 M115 75 l 12 12 M185 145 l -12 -12 M185 75 l -12 12 M115 145 l 12 -12"/>
+  </g>
+  <circle cx="150" cy="110" r="30" fill="#FFD76A" stroke="#2A3550" stroke-width="3.2" filter="url(#h-rough)"/>
+
+  <!-- breathing ring -->
+  <g class="h-breathe" fill="none" stroke="#38C8C1" stroke-width="3.4">
+    <circle cx="250" cy="300" r="46"/>
+    <circle cx="250" cy="300" r="34" stroke="#8FE4DE"/>
+  </g>
+
+  <!-- character reading a book -->
+  <g filter="url(#h-rough2)">
+    <ellipse cx="150" cy="352" rx="70" ry="18" fill="#E4EEFF" stroke="#2A3550" stroke-width="3"/>
+    <path d="M104 344 q 0 -70 46 -70 q 46 0 46 70 z" fill="#DFF3EA" stroke="#2A3550" stroke-width="3"/>
+    <circle cx="150" cy="252" r="30" fill="#FFE7D6" stroke="#2A3550" stroke-width="3"/>
+    <path d="M122 246 q 6 -34 28 -34 q 22 0 28 34 q -13 -16 -28 -13 q -16 3 -28 13z" fill="#4A3F35" stroke="#2A3550" stroke-width="2.8"/>
+    <circle cx="139" cy="256" r="3.2" fill="#2A3550"/>
+    <circle cx="161" cy="256" r="3.2" fill="#2A3550"/>
+    <path d="M139 266 q 11 9 22 0" fill="none" stroke="#2A3550" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="128" cy="264" r="5" fill="#FFB3A7" opacity=".8"/>
+    <circle cx="172" cy="264" r="5" fill="#FFB3A7" opacity=".8"/>
+    <path d="M108 312 q 22 14 42 6" fill="none" stroke="#2A3550" stroke-width="3" stroke-linecap="round"/>
+    <path d="M192 312 q -22 14 -42 6" fill="none" stroke="#2A3550" stroke-width="3" stroke-linecap="round"/>
+    <path d="M116 322 l 34 -10 34 10 -34 12z" fill="#2F80FF" stroke="#2A3550" stroke-width="2.6"/>
+    <path d="M150 312 l 0 12" stroke="#2A3550" stroke-width="2.2"/>
+  </g>
+
+  <!-- floating hearts / leaves -->
+  <g fill="#FF8B84" filter="url(#h-rough2)">
+    <path class="h-float" d="M300 260 c -6 -8 -20 -6 -20 4 c 0 8 12 12 20 20 c 8 -8 20 -12 20 -20 c 0 -10 -14 -12 -20 -4z"/>
+  </g>
+  <g fill="#34C759" filter="url(#h-rough2)">
+    <path class="h-float f2" d="M338 300 q 16 -6 24 -24 q -20 2 -24 24z"/>
+  </g>
+  <g fill="#38C8C1" filter="url(#h-rough2)">
+    <circle class="h-float f3" cx="286" cy="316" r="7"/>
+  </g>
+
+  <!-- title -->
+  <g class="hw" filter="url(#h-rough2)">
+    <text x="372" y="140" font-size="66" font-weight="700" fill="#2F80FF">考心晴</text>
+    <text x="376" y="182" font-size="24" fill="#4A5872">备考路上的温柔陪伴 · 把压力变成小步骤</text>
+    <path d="M376 196 q 150 8 300 0" fill="none" stroke="#38C8C1" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- tag chips -->
+  <g class="hw" filter="url(#h-rough2)">
+    <g stroke="#2A3550" stroke-width="2.2">
+      <rect x="376" y="216" width="104" height="38" rx="12" fill="#EAF4FF"/>
+      <rect x="490" y="216" width="104" height="38" rx="12" fill="#EAF7EE"/>
+      <rect x="604" y="216" width="150" height="38" rx="12" fill="#F1ECFF"/>
+    </g>
+    <text x="394" y="241" font-size="17" fill="#2A3550">考试倒计时</text>
+    <text x="508" y="241" font-size="17" fill="#2A3550">压力测评</text>
+    <text x="622" y="241" font-size="17" fill="#2A3550">CBT 认知调节</text>
+    <g stroke="#2A3550" stroke-width="2.2">
+      <rect x="376" y="264" width="104" height="38" rx="12" fill="#FFF3E6"/>
+      <rect x="490" y="264" width="104" height="38" rx="12" fill="#EAF4FF"/>
+    </g>
+    <text x="394" y="289" font-size="17" fill="#2A3550">呼吸训练</text>
+    <text x="508" y="289" font-size="17" fill="#2A3550">心语陪伴</text>
+  </g>
+
+  <!-- countdown card -->
+  <g filter="url(#h-rough)" >
+    <rect x="790" y="250" width="170" height="110" rx="18" fill="#EAF4FF" stroke="#2A3550" stroke-width="3.2"/>
+  </g>
+  <g class="hw" filter="url(#h-rough2)">
+    <text x="810" y="286" font-size="15" fill="#4A5872">距考试还有</text>
+    <text x="810" y="330" font-size="40" font-weight="700" fill="#2F80FF">30</text>
+    <text x="858" y="330" font-size="20" fill="#4A5872">天</text>
+    <circle cx="930" cy="272" r="6" fill="#FF8B84" class="h-blink"/>
+  </g>
+
+  <!-- chat bubble -->
+  <g class="h-pop" filter="url(#h-rough2)">
+    <rect x="600" y="80" width="360" height="64" rx="16" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
+    <path d="M636 144 l -16 20 4 -22z" fill="#FFF7E6" stroke="#2A3550" stroke-width="3"/>
+    <g class="hw">
+      <text x="622" y="110" font-size="18" fill="#2F80FF">听澜：别怕，我们一步一步来</text>
+      <text x="622" y="132" font-size="14" fill="#4A5872">今天只做一件小事，就已经很棒了</text>
+    </g>
+  </g>
+</svg>

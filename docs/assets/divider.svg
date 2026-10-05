@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 70" width="1200" height="70" role="img" aria-label="手绘分隔线">
+  <title>手绘分隔线</title>
+  <defs>
+    <filter id="d-rough" x="-4%" y="-40%" width="108%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.05" numOctaves="2" seed="77" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <style>
+      @keyframes d-breathe { 0%,100% { transform: scale(.8); opacity:.6; } 50% { transform: scale(1.1); opacity:1; } }
+      .d-breathe { transform-origin: 600px 35px; animation: d-breathe 6s ease-in-out infinite; }
+      @keyframes d-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+      .d-bob { animation: d-bob 2.8s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <path d="M30 35 q 40 -18 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0"
+        fill="none" stroke="#2A3550" stroke-width="2.6" stroke-linecap="round" opacity=".5" filter="url(#d-rough)"/>
+
+  <g class="d-bob" stroke="#2A3550" stroke-width="2.2" fill="none" stroke-linecap="round">
+    <path d="M180 24 q -8 10 0 20 M188 22 q 8 12 0 22"/>
+    <path d="M1012 24 q -8 10 0 20 M1020 22 q 8 12 0 22"/>
+  </g>
+
+  <g class="d-breathe" filter="url(#d-rough)" stroke="#38C8C1" stroke-width="2.6" fill="#DFF3EA">
+    <circle cx="600" cy="35" r="16"/>
+    <path d="M600 24 c -3 -5 -11 -4 -11 2 c 0 4 6 7 11 11 c 5 -4 11 -7 11 -11 c 0 -6 -8 -7 -11 -2z" fill="#FF8B84" stroke="#2A3550" stroke-width="1.8"/>
+  </g>
+
+  <g stroke="#2A3550" stroke-width="2.2" fill="none" stroke-linecap="round" filter="url(#d-rough)">
+    <path d="M420 30 l 6 12 12 2 -9 9 2 12 -11 -6 -11 6 2 -12 -9 -9 12 -2z" fill="#FFD76A"/>
+    <circle cx="760" cy="32" r="7" fill="#9FD8FF"/>
+    <path d="M60 34 q 12 -10 24 0" stroke="#38C8C1"/>
+    <path d="M1130 34 q 12 -10 24 0" stroke="#38C8C1"/>
+  </g>
+</svg>

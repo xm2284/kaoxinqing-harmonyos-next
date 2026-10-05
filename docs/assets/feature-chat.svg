@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" width="560" height="340" role="img" aria-label="听澜心语 · 多 Agent 陪伴对话">
+  <title>听澜心语 · 多 Agent 陪伴对话</title>
+  <defs>
+    <filter id="m-rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.016 0.022" numOctaves="2" seed="41" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="m-rough2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="12" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="m-paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0.07 0"/>
+    </filter>
+    <style>
+      .hw { font-family: 'Comic Sans MS','Segoe Print','Bradley Hand','KaiTi','STKaiti',cursive; }
+      @keyframes m-in { 0% { transform: scale(.95); } 8% { transform: scale(1.02); } 16%,100% { transform: scale(1); } }
+      .m-b1 { transform-origin: 150px 150px; animation: m-in 3.6s ease-out infinite; }
+      .m-b2 { transform-origin: 150px 210px; animation: m-in 3.6s ease-out infinite; animation-delay: 1.2s; }
+      .m-b3 { transform-origin: 150px 268px; animation: m-in 3.6s ease-out infinite; animation-delay: 2.4s; }
+    </style>
+  </defs>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#F7FAFF" stroke="#2A3550" stroke-width="3.4" filter="url(#m-rough)"/>
+  <rect x="4" y="4" width="552" height="332" rx="22" fill="#fff" filter="url(#m-paper)"/>
+  <rect x="440" y="12" width="86" height="26" rx="3" fill="#EAF4FF" stroke="#2A3550" stroke-width="2" transform="rotate(5 483 25)" filter="url(#m-rough2)" opacity=".9"/>
+  <g class="hw" filter="url(#m-rough2)">
+    <text x="150" y="58" font-size="30" font-weight="700" fill="#2A3550">③ 听澜心语</text>
+    <path d="M150 70 q 90 8 180 0" fill="none" stroke="#38C8C1" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- chat panel -->
+  <g filter="url(#m-rough2)">
+    <rect x="40" y="92" width="480" height="216" rx="18" fill="#EAF4FF" stroke="#2A3550" stroke-width="3.4"/>
+  </g>
+
+  <!-- safety gate badge -->
+  <g filter="url(#m-rough2)">
+    <rect x="330" y="96" width="176" height="34" rx="10" fill="#EAF7EE" stroke="#2A3550" stroke-width="2.6"/>
+    <path d="M346 104 l 10 3 10 -3 v 8 q 0 8 -10 11 q -10 -3 -10 -11z" fill="#34C759" stroke="#2A3550" stroke-width="2.2"/>
+    <text x="376" y="119" font-size="14" fill="#2A3550" class="hw">安全守门 · 先保护你</text>
+  </g>
+
+  <!-- bubbles -->
+  <g class="m-b1" filter="url(#m-rough2)">
+    <rect x="64" y="130" width="300" height="40" rx="14" fill="#fff" stroke="#2A3550" stroke-width="2.8"/>
+    <text x="80" y="156" font-size="15" fill="#4A5872" class="hw">我总担心考不好…</text>
+  </g>
+  <g class="m-b2" filter="url(#m-rough2)">
+    <rect x="64" y="190" width="330" height="40" rx="14" fill="#DFF3EA" stroke="#2A3550" stroke-width="2.8"/>
+    <text x="80" y="215" font-size="15" fill="#1E5C43" class="hw">听澜：这种担心很正常，我在。</text>
+  </g>
+  <g class="m-b3" filter="url(#m-rough2)">
+    <rect x="64" y="248" width="356" height="40" rx="14" fill="#F1ECFF" stroke="#2A3550" stroke-width="2.8"/>
+    <text x="80" y="273" font-size="15" fill="#4A3A8A" class="hw">明镜：试试「最坏结果真的会发生吗？」</text>
+  </g>
+
+  <!-- agent chain labels -->
+  <g class="hw" filter="url(#m-rough2)">
+    <text x="436" y="220" font-size="13" fill="#2F80FF">听澜</text>
+    <text x="436" y="244" font-size="13" fill="#7D61DA">明镜</text>
+    <text x="436" y="268" font-size="13" fill="#2F80FF">拾光</text>
+    <path d="M430 208 v 12 M430 232 v 12 M430 256 v 12" stroke="#8A98AA" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

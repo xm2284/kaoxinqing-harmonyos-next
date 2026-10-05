@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/hero.svg" alt="考心晴 · 备考路上的温柔陪伴" width="100%" />
+
 # 考心晴 ☀️
 
 ### 基于 HarmonyOS NEXT 的「考试焦虑」智能调节助手
@@ -19,7 +21,7 @@
 
 </div>
 
-<br>
+<p align="center"><img src="docs/assets/divider.svg" alt="" width="100%" /></p>
 
 <p align="center">
   <a href="docs/screenshots/shot-01.jpg"><img src="docs/screenshots/shot-01.jpg" width="120" title="启动页"/></a>
@@ -44,6 +46,19 @@
 
 ## ✨ 核心功能
 
+<p align="center">
+  <img src="docs/assets/feature-countdown.svg" width="49%" alt="考试倒计时" />
+  <img src="docs/assets/feature-assessment.svg" width="49%" alt="压力测评" />
+</p>
+<p align="center">
+  <img src="docs/assets/feature-chat.svg" width="49%" alt="听澜心语" />
+  <img src="docs/assets/feature-breath.svg" width="49%" alt="云息呼吸" />
+</p>
+<p align="center">
+  <img src="docs/assets/feature-cbt.svg" width="49%" alt="认知重构工坊" />
+  <img src="docs/assets/feature-tree.svg" width="49%" alt="思维进化树" />
+</p>
+
 | 模块 | 说明 |
 | --- | --- |
 | 🏠 **智能首页** | 考试倒计时、今日任务、压力指数与计划进度一屏总览，根据压力等级 / 倒计时 / 训练记录生成个性化推荐 |
@@ -67,6 +82,16 @@
 - **分布式数据续接**：同账号两台鸿蒙设备间同步测评进度、压力指数与学习计划
 - **小艺意图直达**：支持通过 Want / Intents Kit 一键进入首页、呼吸训练或压力测评
 - **双模式 AI**：断网或无密钥时使用本地 CBT 规则，保证核心调节链路永远可用
+
+---
+
+## 🤖 听澜心语 · 多 Agent 链路
+
+<p align="center">
+  <img src="docs/assets/pipeline.svg" alt="听澜心语多 Agent 链路与双模式 AI" width="100%" />
+</p>
+
+对话不是单轮问答，而是一条**有安全感的流水线**：先由「安全守门」识别高风险表达并直接引导真实支持，再依次交给「听澜」共情、「明镜」识别认知偏差、「拾光」给出可执行建议，最后由「心语总控」汇总成一段温柔而具体的回复。
 
 ---
 
@@ -157,7 +182,9 @@ kaoxinqing-harmonyos-next
         │   ├── widget/           # 元服务压力卡片
         │   └── common/           # 数据模型、UI Tokens、自适应布局
         └── resources/            # 页面资源、rawfile 插图/音效素材
-├── docs/screenshots/             # 界面预览截图
+├── docs/
+│   ├── assets/                   # 手绘风 SVG 插画与横幅
+│   └── screenshots/              # 界面预览截图
 ├── build-profile.json5           # 工程构建配置
 ├── oh-package.json5              # 依赖清单
 └── hvigorfile.ts                 # hvigor 构建脚本
